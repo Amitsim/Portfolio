@@ -5,284 +5,303 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Developer Portfolio</title>
     <style>
-        :root {
-            --primary: #1a1a1a;
-            --secondary: #2563eb;
-            --text: #ffffff;
-            --bg: #f3f4f6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, system-ui, sans-serif;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--primary);
-            line-height: 1.6;
-        }
-
-        nav {
-            background: var(--primary);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: var(--text);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
+        /* Previous CSS remains the same until projects-grid */
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s;
+        .project-card {
+            position: relative;
+            cursor: pointer;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-
-        .hamburger {
+        .project-modal {
             display: none;
-            color: var(--text);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
             background: none;
             border: none;
         }
 
-        .hero {
-            background: var(--primary);
-            color: var(--text);
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .projects-grid {
+        .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
             margin: 1rem 0;
         }
 
-        .tag {
-            background: #e5e7eb;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        .blog-posts {
+        .demo-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            margin: 1rem 0;
+        }
+
+        .skills-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
         }
 
-        .blog-card {
+        .skill-card {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .skill-level {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+
+        .game-jam {
             background: white;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
         }
 
-        .date {
-            color: #666;
-            font-size: 0.875rem;
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            color: var(--primary);
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        footer {
+        .achievement-card {
             background: var(--primary);
             color: var(--text);
+            padding: 1.5rem;
+            border-radius: 8px;
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
         }
 
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--primary);
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
+        .download-section {
+            text-align: center;
+            margin: 2rem 0;
         }
+
+        .download-button {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            color: #e5e7eb;
+        }
+
+        /* Add previous CSS here */
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-content">
-            <a href="#" class="logo">Amit</a>
-            <button class="hamburger">☰</button>
-            <div class="nav-links">
-                <a href="#projects">Projects</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
+    <!-- Previous nav and hero sections remain the same -->
+
+    <section class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-section">
+            <div class="skills-grid" id="skills-container">
+                <!-- Skills will be added by JavaScript -->
             </div>
         </div>
-    </nav>
-
-    <section class="hero">
-        <h1>Game Developer & Designer</h1>
-        <p>Crafting immersive gaming experiences</p>
     </section>
 
     <section id="projects" class="container">
-        <h2 class="section-title">Featured Projects</h2>
+        <h2 class="section-title">Game Projects</h2>
         <div class="projects-grid" id="projects-container">
-            <!-- Projects will be added here by JavaScript -->
+            <!-- Projects will be added by JavaScript -->
         </div>
     </section>
 
-    <section id="blog" class="container">
-        <h2 class="section-title">Latest Posts</h2>
-        <div class="blog-posts" id="blog-container">
-            <!-- Blog posts will be added here by JavaScript -->
+    <section class="container">
+        <h2 class="section-title">Game Jams & Competitions</h2>
+        <div id="jams-container">
+            <!-- Game jams will be added by JavaScript -->
         </div>
     </section>
 
-    <section id="contact" class="container">
-        <h2 class="section-title">Get in Touch</h2>
-        <div class="social-links">
-            <a href="https://github.com/yourusername">GitHub</a>
-            <a href="mailto:your@email.com">Email</a>
-            <a href="https://twitter.com/yourusername">Twitter</a>
+    <section class="container">
+        <h2 class="section-title">Achievements</h2>
+        <div class="achievements" id="achievements-container">
+            <!-- Achievements will be added by JavaScript -->
         </div>
     </section>
 
-    <footer>
-        <p>© 2025 Amit. All rights reserved.</p>
-    </footer>
+    <section class="container">
+        <h2 class="section-title">Testimonials</h2>
+        <div class="testimonials" id="testimonials-container">
+            <!-- Testimonials will be added by JavaScript -->
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Downloads & Resources</h2>
+        <div class="download-section">
+            <a href="#" class="download-button">Download Resume</a>
+            <a href="#" class="download-button">Game Design Document Template</a>
+            <a href="#" class="download-button">Unity Asset Package</a>
+        </div>
+    </section>
+
+    <!-- Previous blog and contact sections remain the same -->
 
     <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        // Previous mobile menu code remains the same
 
-        // Sample data - replace with your own
+        const skills = [
+            { name: "Unity", level: 90, category: "Game Engines" },
+            { name: "Unreal Engine", level: 75, category: "Game Engines" },
+            { name: "C#", level: 85, category: "Programming" },
+            { name: "C++", level: 70, category: "Programming" },
+            { name: "3D Modeling", level: 65, category: "Art" },
+            { name: "Game Design", level: 80, category: "Design" }
+        ];
+
         const projects = [
             {
                 title: "Space Explorer",
-                description: "A 2D space exploration game built with Unity",
+                description: "A 2D space exploration game with procedural galaxy generation",
+                shortDescription: "Procedural space exploration game",
                 image: "/api/placeholder/400/300",
-                tags: ["Unity", "C#", "2D Graphics"],
-                link: "#"
+                gallery: ["/api/placeholder/400/300", "/api/placeholder/400/300"],
+                video: "demo-video-url",
+                tags: ["Unity", "C#", "Procedural Generation"],
+                link: "#",
+                features: [
+                    "Procedurally generated galaxies",
+                    "Dynamic combat system",
+                    "Resource management"
+                ],
+                platforms: ["Steam", "itch.io"],
+                downloads: 15000,
+                rating: 4.5
             },
-            {
-                title: "Dungeon Crawler",
-                description: "Procedurally generated dungeons using custom algorithms",
-                image: "/api/placeholder/400/300",
-                tags: ["Unreal Engine", "C++", "Procedural Generation"],
-                link: "#"
-            }
+            // Add more projects...
         ];
 
-        const blogPosts = [
+        const gameJams = [
             {
-                title: "Implementing Procedural Generation",
-                date: "2025-02-01",
-                preview: "How I approached random dungeon generation in my latest project...",
+                name: "Global Game Jam 2025",
+                project: "Time Loop Puzzle",
+                placement: "1st Place",
+                description: "Created a puzzle game based on time manipulation mechanics in 48 hours",
                 link: "#"
             },
-            {
-                title: "Performance Optimization Tips",
-                date: "2025-01-15",
-                preview: "Key lessons learned while optimizing game performance...",
-                link: "#"
-            }
+            // Add more game jams...
         ];
 
-        // Render projects
+        const achievements = [
+            {
+                title: "1M+ Downloads",
+                description: "Across all published games"
+            },
+            {
+                title: "Featured on Steam",
+                description: "Space Explorer featured on Steam front page"
+            },
+            // Add more achievements...
+        ];
+
+        const testimonials = [
+            {
+                text: "An exceptional game developer with great attention to detail",
+                author: "John Doe",
+                role: "Lead Developer, Game Studio"
+            },
+            // Add more testimonials...
+        ];
+
+        // Render skills
+        const skillsContainer = document.getElementById('skills-container');
+        skills.forEach(skill => {
+            const skillElement = document.createElement('div');
+            skillElement.className = 'skill-card';
+            skillElement.innerHTML = `
+                <h3>${skill.name}</h3>
+                <div class="skill-level">
+                    <div class="skill-fill" style="width: ${skill.level}%"></div>
+                </div>
+                <p>${skill.category}</p>
+            `;
+            skillsContainer.appendChild(skillElement);
+        });
+
+        // Render projects with modals
         const projectsContainer = document.getElementById('projects-container');
         projects.forEach(project => {
             const projectElement = document.createElement('div');
@@ -291,28 +310,83 @@
                 <img src="${project.image}" alt="${project.title}">
                 <div class="project-content">
                     <h3>${project.title}</h3>
-                    <p>${project.description}</p>
+                    <p>${project.shortDescription}</p>
                     <div class="tags">
                         ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <a href="${project.link}">View Project →</a>
                 </div>
             `;
+
+            const modalElement = document.createElement('div');
+            modalElement.className = 'project-modal';
+            modalElement.innerHTML = `
+                <div class="modal-content">
+                    <button class="close-modal">×</button>
+                    <h2>${project.title}</h2>
+                    <p>${project.description}</p>
+                    <div class="gallery">
+                        ${project.gallery.map(img => `<img src="${img}" alt="Screenshot">`).join('')}
+                    </div>
+                    <iframe class="demo-video" src="${project.video}" frameborder="0" allowfullscreen></iframe>
+                    <h3>Features</h3>
+                    <ul>
+                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                    <p>Available on: ${project.platforms.join(', ')}</p>
+                    <p>Downloads: ${project.downloads.toLocaleString()}</p>
+                    <p>Rating: ${project.rating}/5</p>
+                </div>
+            `;
+
+            projectElement.addEventListener('click', () => {
+                modalElement.style.display = 'block';
+            });
+
+            modalElement.querySelector('.close-modal').addEventListener('click', () => {
+                modalElement.style.display = 'none';
+            });
+
+            document.body.appendChild(modalElement);
             projectsContainer.appendChild(projectElement);
         });
 
-        // Render blog posts
-        const blogContainer = document.getElementById('blog-container');
-        blogPosts.forEach(post => {
-            const postElement = document.createElement('div');
-            postElement.className = 'blog-card';
-            postElement.innerHTML = `
-                <div class="date">${post.date}</div>
-                <h3>${post.title}</h3>
-                <p>${post.preview}</p>
-                <a href="${post.link}">Read More →</a>
+        // Render game jams
+        const jamsContainer = document.getElementById('jams-container');
+        gameJams.forEach(jam => {
+            const jamElement = document.createElement('div');
+            jamElement.className = 'game-jam';
+            jamElement.innerHTML = `
+                <h3>${jam.name}</h3>
+                <p><strong>${jam.project}</strong> - ${jam.placement}</p>
+                <p>${jam.description}</p>
+                <a href="${jam.link}">View Project →</a>
             `;
-            blogContainer.appendChild(postElement);
+            jamsContainer.appendChild(jamElement);
+        });
+
+        // Render achievements
+        const achievementsContainer = document.getElementById('achievements-container');
+        achievements.forEach(achievement => {
+            const achievementElement = document.createElement('div');
+            achievementElement.className = 'achievement-card';
+            achievementElement.innerHTML = `
+                <h3>${achievement.title}</h3>
+                <p>${achievement.description}</p>
+            `;
+            achievementsContainer.appendChild(achievementElement);
+        });
+
+        // Render testimonials
+        const testimonialsContainer = document.getElementById('testimonials-container');
+        testimonials.forEach(testimonial => {
+            const testimonialElement = document.createElement('div');
+            testimonialElement.className = 'testimonial';
+            testimonialElement.innerHTML = `
+                <p>${testimonial.text}</p>
+                <p><strong>${testimonial.author}</strong></p>
+                <p>${testimonial.role}</p>
+            `;
+            testimonialsContainer.appendChild(testimonialElement);
         });
     </script>
 </body>

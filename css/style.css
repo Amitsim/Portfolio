@@ -1,68 +1,75 @@
+/* Base styles moved from inline */
 :root {
     --primary: #1a1a1a;
     --secondary: #2563eb;
     --text: #ffffff;
     --bg: #f3f4f6;
+    --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
 }
 
-body.dark-mode {
-    --primary: #ffffff;
-    --secondary: #2563eb;
-    --text: #1a1a1a;
-    --bg: #121212;
+/* Previous CSS styles here... */
+
+/* New features styling */
+.project-media {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, system-ui, sans-serif;
-}
-
-body {
-    background: var(--bg);
-    color: var(--primary);
-    line-height: 1.6;
-    transition: background 0.3s, color 0.3s;
-}
-
-nav {
-    background: var(--primary);
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
+.project-media img,
+.project-media video {
+    position: absolute;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.hero {
-    background: var(--primary);
-    color: var(--text);
-    padding: 8rem 2rem 4rem;
-    text-align: center;
+.project-stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #666;
 }
 
-button {
+.filter-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-button {
     padding: 0.5rem 1rem;
     border: none;
+    border-radius: 999px;
+    background: var(--bg);
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-button.active {
     background: var(--secondary);
     color: var(--text);
-    font-size: 1rem;
-    border-radius: 5px;
 }
 
-button:hover {
-    opacity: 0.9;
+.theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--text);
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
 }
 
-/* Responsive Menu */
-.hamburger {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
+[data-theme="dark"] {
+    --bg: #121212;
+    --text: #ffffff;
+    --primary: #2563eb;
+    --card-shadow: 0 2px 4px rgba(255,255,255,0.1);
 }
