@@ -1,0 +1,32 @@
+{
+    "projects": [
+        {
+            "title": "Space Explorer",
+            "description": "A 2D space exploration game built with Unity",
+            "image": "images/space-explorer.jpg",
+            "tags": ["Unity", "C#", "2D Graphics"],
+            "link": "#"
+        },
+        {
+            "title": "Dungeon Crawler",
+            "description": "Procedurally generated dungeons using custom algorithms",
+            "image": "images/dungeon-crawler.jpg",
+            "tags": ["Unreal Engine", "C++", "Procedural Generation"],
+            "link": "#"
+        }
+    ],
+    "blogPosts": [
+        {
+            "title": "Implementing Procedural Generation",
+            "date": "2025-02-01",
+            "preview": "How I approached random dungeon generation in my latest project...",
+            "link": "#"
+        },
+        {
+            "title": "Performance Optimization Tips",
+            "date": "2025-01-15",
+            "preview": "Key lessons learned while optimizing game performance...",
+            "link": "#"
+        }
+    ]
+}

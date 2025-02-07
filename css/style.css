@@ -1,0 +1,68 @@
+:root {
+    --primary: #1a1a1a;
+    --secondary: #2563eb;
+    --text: #ffffff;
+    --bg: #f3f4f6;
+}
+
+body.dark-mode {
+    --primary: #ffffff;
+    --secondary: #2563eb;
+    --text: #1a1a1a;
+    --bg: #121212;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, system-ui, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--primary);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav {
+    background: var(--primary);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.hero {
+    background: var(--primary);
+    color: var(--text);
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    background: var(--secondary);
+    color: var(--text);
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Menu */
+.hamburger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+}
