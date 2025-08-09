@@ -3,9 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Software Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #000000;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #333333;
+            --light-gray: #666666;
+            --very-light-gray: #cccccc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background-color: var(--primary-black);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-gray) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: var(--very-light-gray);
+            font-weight: 300;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .header .description {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--very-light-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--dark-gray);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        /* Featured Project */
+        .featured-project {
+            background: var(--dark-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-project:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            padding: 40px;
+            background: linear-gradient(135deg, var(--medium-gray) 0%, var(--dark-gray) 100%);
+        }
+
+        .project-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-subtitle {
+            color: var(--very-light-gray);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .project-content {
+            padding: 40px;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .arch-layer {
+            background: var(--medium-gray);
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .arch-layer:hover {
+            border-color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .arch-layer h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .arch-layer ul {
+            list-style: none;
+            color: var(--very-light-gray);
+        }
+
+        .arch-layer ul li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Tech Stack Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tech-category {
+            background: var(--dark-gray);
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 4px solid var(--white);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-category h4 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .tech-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: var(--medium-gray);
+            color: var(--very-light-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--light-gray);
+            color: var(--white);
+        }
+
+        /* Features List */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: var(--dark-gray);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 3px solid var(--white);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item h5 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .feature-item p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .contact-item {
+            padding: 10px;
+            background: var(--dark-gray);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0px;
+        }
+
+        .contact-item a {
+            color: var(--very-light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--white);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .architecture {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    hellop
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+                            <div class="header-content">
+                <h1>Amit Simanovsky</h1>
+                <p class="subtitle">Software Engineering Student</p>
+                <p class="description">Specializing in high-performance distributed systems, real-time networking, and advanced compilation pipelines. Currently developing a scalable multiplayer platform with server-authoritative architecture and custom toolchains.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#project">Featured Project</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#techstack">Tech Stack</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Featured Project Section -->
+    <section id="project" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Project</h2>
+            
+            <div class="featured-project">
+                <div class="project-header">
+                    <h3 class="project-title">High-Performance Multiplayer Platform</h3>
+                    <p class="project-subtitle">Server-Authoritative System with Custom Build Pipeline</p>
+                    <p class="project-description">
+                        A distributed real-time platform built from the ground up in modern C++. Features server-side 
+                        simulation, automated code compilation with security sandboxing, and handles hundreds of concurrent 
+                        players with sub-20ms latency. Includes custom networking protocols, native-managed interop, 
+                        and integrated developer toolchain.
+                    </p>
+                </div>
+                
+                <div class="project-content">
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <h5>Server-Authoritative Architecture</h5>
+                            <p>Complete simulation runs server-side with deterministic physics and zero-overhead native-managed interop using function pointers.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h5>Real-Time Delta Synchronization</h5>
+                            <p>Custom networking protocol with compressed delta buffers, tracking per-frame state changes with sub-20ms latency.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h5>Automated Compilation Pipeline</h5>
+                            <p>Cloud-based build service with Roslyn integration, secure code compilation, and content-addressed deployment.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h5>Cross-Platform Client SDK</h5>
+                            <p>Thin client architecture with automatic state synchronization and unified API supporting multiple platforms.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h5>Distributed Matchmaking System</h5>
+                            <p>Multi-region infrastructure with intelligent load balancing, automatic scaling, and fault tolerance.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h5>Sandboxed Code Execution</h5>
+                            <p>Secure runtime environment with AssemblyLoadContext isolation, execution monitoring, and developer-friendly tooling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="section">
+        <div class="container">
+            <h2 class="section-title">System Architecture</h2>
+            
+            <div class="architecture">
+                <div class="arch-layer">
+                    <h4>Server Engine</h4>
+                    <ul>
+                        <li>• High-Performance C++</li>
+                        <li>• Deterministic Physics</li>
+                        <li>• Custom Networking</li>
+                        <li>• Function Pointer Interop</li>
+                        <li>• Delta Compression</li>
+                        <li>• Memory Management</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-layer">
+                    <h4>Build & Runtime</h4>
+                    <ul>
+                        <li>• Roslyn Compilation</li>
+                        <li>• Code Sandboxing</li>
+                        <li>• Version Control</li>
+                        <li>• Assembly Loading</li>
+                        <li>• Security Validation</li>
+                        <li>• Automated Deployment</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-layer">
+                    <h4>Client Systems</h4>
+                    <ul>
+                        <li>• Cross-Platform SDK</li>
+                        <li>• State Synchronization</li>
+                        <li>• Real-time Updates</li>
+                        <li>• Developer Tools</li>
+                        <li>• Performance Metrics</li>
+                        <li>• Error Handling</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--white);">Technical Highlights</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h5>Zero-Overhead Interop</h5>
+                        <p>Manual .NET runtime hosting with raw function pointers for sub-microsecond native-to-managed calls.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>Real-Time Networking</h5>
+                        <p>Custom protocol achieving sub-20ms latency with delta compression and efficient state synchronization.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>Secure Code Pipeline</h5>
+                        <p>Automated Roslyn compilation with sandboxed execution and content-addressed deployment system.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>Scalable Architecture</h5>
+                        <p>Distributed system supporting hundreds of concurrent connections with automatic load balancing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--white);">Engineering Principles</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h5>Performance-Critical</h5>
+                        <p>Deterministic execution with memory pooling, SIMD optimizations, and zero-allocation hot paths.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>Security-First</h5>
+                        <p>Server-authoritative model with code validation, execution sandboxing, and comprehensive monitoring.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>Developer Experience</h5>
+                        <p>Integrated toolchain with real-time feedback, version control, and seamless deployment workflow.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>System Reliability</h5>
+                        <p>Fault-tolerant design with graceful degradation, automatic recovery, and comprehensive logging.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="techstack" class="section">
+        <div class="container">
+            <h2 class="section-title">Technology Stack</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h4>Core Systems</h4>
+                    <div class="tech-list">
+                        <span class="tech-tag">Modern C++</span>
+                        <span class="tech-tag">High-Performance Computing</span>
+                        <span class="tech-tag">Network Programming</span>
+                        <span class="tech-tag">Memory Management</span>
+                        <span class="tech-tag">Multithreading</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>Runtime & Compilation</h4>
+                    <div class="tech-list">
+                        <span class="tech-tag">Native-Managed Interop</span>
+                        <span class="tech-tag">Roslyn Compiler</span>
+                        <span class="tech-tag">Assembly Loading</span>
+                        <span class="tech-tag">Code Analysis</span>
+                        <span class="tech-tag">Build Automation</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>Infrastructure</h4>
+                    <div class="tech-list">
+                        <span class="tech-tag">Distributed Systems</span>
+                        <span class="tech-tag">Load Balancing</span>
+                        <span class="tech-tag">Auto-scaling</span>
+                        <span class="tech-tag">Security Sandboxing</span>
+                        <span class="tech-tag">Performance Monitoring</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>Developer Tools</h4>
+                    <div class="tech-list">
+                        <span class="tech-tag">SDK Development</span>
+                        <span class="tech-tag">Version Control</span>
+                        <span class="tech-tag">IDE Integration</span>
+                        <span class="tech-tag">Deployment Pipelines</span>
+                        <span class="tech-tag">Cross-Platform APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Socials</h2>
+            
+            <div class="contact-grid">
+                <!-- <div class="contact-item">
+                    <h4>Email</h4>
+                    <a href="mailto:amitsimangames@gmail.com">amitsimangames@gmail.com</a>
+                </div> -->
+                
+                <div class="contact-item">
+                    <h4> <a href="https://github.com/Amitsim" target="_blank">GitHub</a></h4>
+                </div>
+                
+                <div class="contact-item">
+                    <h4 ><a href="https://www.linkedin.com/in/amit-s-697816192/" target="_blank">linkedin</a></h4>
+                </div>
+                
+                <!-- <div class="contact-item">
+                    <h4>Portfolio</h4>
+                    <a href="#" target="_blank">View Full Portfolio</a>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Add hover effects for tech tags
+        document.querySelectorAll('.tech-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
