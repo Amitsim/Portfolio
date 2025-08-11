@@ -456,16 +456,51 @@
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-200%);
+        transform: translateX(-300%);
     }
 }
+
+/* Reusable diagonal stripe texture overlay */
+.texture-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.texture-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Make sure content is above the overlay */
+.texture-overlay > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Usage on existing classes */
+.section.texture-overlay,
+.tech-category.texture-overlay {
+    /* add a slight relative positioning if needed */
+    position: relative;
+}
+
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-                            <div class="header-content">
+            <div class="header-content">
                 <h1>Amit Simanovsky</h1>
                 <p class="subtitle">Software Engineering Student</p>
                 <p class="description">Specializing in cloud-native high-performance distributed systems, low-latency networking, and secure automated build pipelines. Currently building a multi-region scalable platform with server-authoritative architecture, custom toolchains, and infrastructure optimized for fault tolerance and global deployment.</p>
@@ -495,10 +530,11 @@
             
             <div class="featured-project">
                 <div class="project-header">
-                    <h3 class="project-title">High-Performance Multiplayer Platform</h3>
-                    <p class="project-subtitle">Server-Authoritative System with Custom Build Pipeline</p>
+                    <h3 class="project-title">Code-Driven Distributed Simulation Platform</h3>
+<p class="project-subtitle">Custom logic in a high-performance authoritative simulation with tailored build pipeline.</p>
+
                     <p class="project-description">
-                       A distributed, cloud-ready real-time platform built in modern C++. Designed for multi-region deployments, automated code compilation with security sandboxing, and capable of handling hundreds of concurrent connections with sub-20 ms end-to-end latency. Includes a custom low-latency networking layer, zero-overhead native-managed interop, and an integrated developer toolchain for rapid iteration and safe production deployment.
+                       A distributed, cloud-ready real-time simulation platform built in modern C++. Designed for multi-region deployments, automated code compilation with security sandboxing, and capable of handling hundreds of concurrent connections with sub-20 ms end-to-end latency. Includes a custom low-latency networking layer, zero-overhead native-managed interop, and an integrated developer toolchain for rapid iteration and safe production deployment.
                     </p>
                 </div>
                 
@@ -672,40 +708,79 @@
                         <span class="tech-tag">Cross-Platform APIs</span>
                     </div>
                 </div>
-
-<div class="tech-category">
-                    <h4>Cloud & DevOps</h4>
-                    <div class="tech-list">
-                        <span class="tech-tag">Azure</span>
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">Kubernetes</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">CI/CD Pipelines</span>
-                        <span class="tech-tag">Cloud Security</span>
-                        <span class="tech-tag">Load Balancing</span>
-                        <span class="tech-tag">Performance Monitoring</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Carousel Section -->
- <section id="skills" class="section">
-    <div class="container">
-        <h2 class="section-title">Skills</h2>
-        <ul class="skills-list">
-            <li><strong>Cloud Platforms:</strong> AWS (EC2, Lambda, CloudWatch), Azure (Functions, AKS, DevOps Pipelines)</li>
-            <li><strong>Cloud & DevOps:</strong> Kubernetes, Docker, CI/CD Pipelines, Cloud Security, Load Balancing, Performance Monitoring</li>
-            <li><strong>Programming Languages:</strong> C++, C#, Java, JavaScript, PHP, Bash</li>
-            <li><strong>Systems Programming:</strong> High-Performance Computing, Network Programming, Memory Management, Multithreading, Delta Compression</li>
-            <li><strong>Game & Graphics:</strong> Unity, Unreal Engine, OpenGL, Cross-Platform SDK Development</li>
-            <li><strong>Databases:</strong> PostgreSQL, MySQL, Redis, Firebase</li>
-            <li><strong>Web Development:</strong> Node.js, ASP.NET, React, CSS</li>
-            <li><strong>Other Tools:</strong> Git, Version Control, Build Automation, IDE Integration</li>
-        </ul>
-    </div>
-</section>
+
+    <section id="skills" class="skills-carousel-section ">
+            <h2 class="section-title">Skills</h2>
+
+        <div class="container">
+
+            <div class="skills-carousel ">
+                <div class="skills-track">
+
+                    <span class="skill-pill" data-desc="Built high-performance multiplayer systems and native-managed interop">C++</span>
+                    <span class="skill-pill" data-desc="Developed secure compilation pipeline with Roslyn integration">C#</span>
+                    <span class="skill-pill" data-desc="Created REST APIs and real-time web services">Node.js</span>
+                    <span class="skill-pill" data-desc="Built dynamic web applications and server-side paypal transaction logic">PHP</span>
+                    <span class="skill-pill" data-desc="Implemented custom graphics rendering and shader programming">OpenGL</span>
+                    <span class="skill-pill" data-desc="Containerized applications for scalable deployment">Docker</span>
+                    <span class="skill-pill" data-desc="Orchestrated distributed services with auto-scaling">Kubernetes</span>
+                    <span class="skill-pill" data-desc="System administration and server management">Linux</span>
+                    <span class="skill-pill" data-desc="Automated build scripts and system configuration">Bash</span>
+                    <span class="skill-pill" data-desc="Developed client SDK and cross-platform applications">Unity</span>
+                    <span class="skill-pill" data-desc="Developed real-time ocean simulations based on real data">Unreal</span>
+                    <span class="skill-pill" data-desc="Developed an embedded Git GUI tool for Unity to simplify version control.">Git</span>
+                    <span class="skill-pill" data-desc="Implemented real-time database integration to support authenticated users.">Firebase</span>
+                    <span class="skill-pill" data-desc="Developed a Discord bot addon in Python, deployed and managed using Azure cloud services.">Azure</span>
+                    <span class="skill-pill" data-desc="Hosted remote simulations on EC2 instances, and utilized lambda functions for cost and time reduction">AWS</span>
+                    <span class="skill-pill" data-desc="Enterprise application development and backend services">Java</span>
+                    <span class="skill-pill" data-desc="Database design and query optimization for game data">MySQL</span>
+                    <span class="skill-pill" data-desc="Advanced database features and performance tuning">PostgreSQL</span>
+                    <span class="skill-pill" data-desc="Mobile application development and platform integration">Android</span>
+                    <span class="skill-pill" data-desc="Modern web frontend with component-based architecture">React</span>
+                    <span class="skill-pill" data-desc="High-performance caching for real-time applications">Redis</span>
+                    <span class="skill-pill" data-desc="Developed interactive web interfaces and SPAs">JavaScript</span>
+                    <span class="skill-pill" data-desc="Responsive design and modern CSS frameworks">CSS</span>
+                    <span class="skill-pill" data-desc="Cross-platform mobile app development">Flutter</span>
+                    <span class="skill-pill" data-desc="Developed music uploading and listening platform">ASP .NET</span>
+                   
+ <!--COPY for more pills-->
+  <span class="skill-pill" data-desc="Built high-performance multiplayer systems and native-managed interop">C++</span>
+                    <span class="skill-pill" data-desc="Developed secure compilation pipeline with Roslyn integration">C#</span>
+                    <span class="skill-pill" data-desc="Created REST APIs and real-time web services">Node.js</span>
+                    <span class="skill-pill" data-desc="Built dynamic web applications and server-side paypal transaction logic">PHP</span>
+                    <span class="skill-pill" data-desc="Implemented custom graphics rendering and shader programming">OpenGL</span>
+                    <span class="skill-pill" data-desc="Containerized applications for scalable deployment">Docker</span>
+                    <span class="skill-pill" data-desc="Orchestrated distributed services with auto-scaling">Kubernetes</span>
+                    <span class="skill-pill" data-desc="System administration and server management">Linux</span>
+                    <span class="skill-pill" data-desc="Automated build scripts and system configuration">Bash</span>
+                    <span class="skill-pill" data-desc="Developed client SDK and cross-platform applications">Unity</span>
+                    <span class="skill-pill" data-desc="Developed real-time ocean simulations based on real data">Unreal</span>
+                    <span class="skill-pill" data-desc="Developed an embedded Git GUI tool for Unity to simplify version control.">Git</span>
+                    <span class="skill-pill" data-desc="Implemented real-time database integration to support authenticated users.">Firebase</span>
+                    <span class="skill-pill" data-desc="Developed a Discord bot addon in Python, deployed and managed using Azure cloud services.">Azure</span>
+                    <span class="skill-pill" data-desc="Hosted simulations on EC2 instances, and utilized lambda fucntions for cost reduction and time efficency">AWS</span>
+                    <span class="skill-pill" data-desc="Enterprise application development and backend services">Java</span>
+                    <span class="skill-pill" data-desc="Database design and query optimization for game data">MySQL</span>
+                    <span class="skill-pill" data-desc="Advanced database features and performance tuning">PostgreSQL</span>
+                    <span class="skill-pill" data-desc="Mobile application development and platform integration">Android</span>
+                    <span class="skill-pill" data-desc="Modern web frontend with component-based architecture">React</span>
+                    <span class="skill-pill" data-desc="High-performance caching for real-time applications">Redis</span>
+                    <span class="skill-pill" data-desc="Developed interactive web interfaces and SPAs">JavaScript</span>
+                    <span class="skill-pill" data-desc="Responsive design and modern CSS frameworks">CSS</span>
+                    <span class="skill-pill" data-desc="Cross-platform mobile app development">Flutter</span>
+                    <span class="skill-pill" data-desc="Developed music uploading and listening platform">ASP .NET</span>
+                </div>
+
+      <div class="skill-header">Hover over a skill to see description here</div>
+
+            </div>
+        </div>
+    </section>
 
 
     <!-- Contact Section -->
