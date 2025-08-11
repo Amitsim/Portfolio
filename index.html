@@ -377,6 +377,88 @@
                 padding: 50px 0;
             }
         }
+
+ /* Skills Carousel */
+.skills-carousel-section {
+    padding: 20px 10vw 40px 10vw; /* reduce vertical padding for less height */
+    border-bottom: 1px solid var(--medium-gray);
+    overflow: visible; /* allow pills to overflow container on hover */
+}
+
+.skills-carousel {
+            border-radius: 8px;
+
+    width: 100%;
+  overflow: hidden; 
+    position: relative;
+    padding: 40px 10vw 40px 10vw; /* reduce vertical padding for less height */
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--dark-gray);
+
+    text-align: center; /* Center all inline/inline-block children */
+}
+
+.skills-track {
+    display: flex;
+    gap: 15px;
+    animation: scrollSkills 60s linear infinite;
+    white-space: nowrap;
+
+    padding-bottom: 20px; /* Add space below pills */
+}
+
+.skill-pill {
+    background: var(--medium-gray);
+    color: var(--very-light-gray);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid var(--light-gray);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transform-origin: top center; /* grow downward only */
+
+}
+
+
+.skill-pill:hover {
+    background: var(--light-gray);
+    color: var(--white);
+ /*   transform: scale(1.1);*/
+    z-index: 10; /* Make sure hovered pill is above everything */
+}
+
+.skills-track:hover {
+    animation-play-state: paused;
+}
+
+/* Header text below pills */
+.skill-header {
+    margin-top: 20px;
+    color: var(--very-light-gray);
+    text-align: center;
+    line-height: 1.5;
+    font-family: inherit;
+    user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animation */
+@keyframes scrollSkills {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
     </style>
 </head>
 <body>
@@ -386,7 +468,7 @@
                             <div class="header-content">
                 <h1>Amit Simanovsky</h1>
                 <p class="subtitle">Software Engineering Student</p>
-                <p class="description">Specializing in high-performance distributed systems, real-time networking, and advanced compilation pipelines. Currently developing a scalable multiplayer platform with server-authoritative architecture and custom toolchains.</p>
+                <p class="description">Specializing in cloud-native high-performance distributed systems, low-latency networking, and secure automated build pipelines. Currently building a multi-region scalable platform with server-authoritative architecture, custom toolchains, and infrastructure optimized for fault tolerance and global deployment.</p>
             </div>
         </div>
     </header>
@@ -399,7 +481,8 @@
                     <li><a href="#project">Featured Project</a></li>
                     <li><a href="#architecture">Architecture</a></li>
                     <li><a href="#techstack">Tech Stack</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Socials</a></li>
                 </ul>
             </div>
         </div>
@@ -415,10 +498,7 @@
                     <h3 class="project-title">High-Performance Multiplayer Platform</h3>
                     <p class="project-subtitle">Server-Authoritative System with Custom Build Pipeline</p>
                     <p class="project-description">
-                        A distributed real-time platform built from the ground up in modern C++. Features server-side 
-                        simulation, automated code compilation with security sandboxing, and handles hundreds of concurrent 
-                        players with sub-20ms latency. Includes custom networking protocols, native-managed interop, 
-                        and integrated developer toolchain.
+                       A distributed, cloud-ready real-time platform built in modern C++. Designed for multi-region deployments, automated code compilation with security sandboxing, and capable of handling hundreds of concurrent connections with sub-20 ms end-to-end latency. Includes a custom low-latency networking layer, zero-overhead native-managed interop, and an integrated developer toolchain for rapid iteration and safe production deployment.
                     </p>
                 </div>
                 
@@ -461,14 +541,14 @@
             
             <div class="architecture">
                 <div class="arch-layer">
-                    <h4>Server Engine</h4>
+                    <h4>Core Platform</h4>
                     <ul>
                         <li>• High-Performance C++</li>
-                        <li>• Deterministic Physics</li>
                         <li>• Custom Networking</li>
                         <li>• Function Pointer Interop</li>
                         <li>• Delta Compression</li>
                         <li>• Memory Management</li>
+                        <li>• Asynchronous I/O</li>
                     </ul>
                 </div>
                 
@@ -485,7 +565,7 @@
                 </div>
                 
                 <div class="arch-layer">
-                    <h4>Client Systems</h4>
+                    <h4>Client Integration</h4>
                     <ul>
                         <li>• Cross-Platform SDK</li>
                         <li>• State Synchronization</li>
@@ -510,7 +590,7 @@
                     </div>
                     <div class="feature-item">
                         <h5>Secure Code Pipeline</h5>
-                        <p>Automated Roslyn compilation with sandboxed execution and content-addressed deployment system.</p>
+                        <p>Automated C# Roslyn compilation with sandboxed execution, CI/CD integration, and content-addressed deployment for multi-tenant cloud environments.</p>
                     </div>
                     <div class="feature-item">
                         <h5>Scalable Architecture</h5>
@@ -592,9 +672,41 @@
                         <span class="tech-tag">Cross-Platform APIs</span>
                     </div>
                 </div>
+
+<div class="tech-category">
+                    <h4>Cloud & DevOps</h4>
+                    <div class="tech-list">
+                        <span class="tech-tag">Azure</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">CI/CD Pipelines</span>
+                        <span class="tech-tag">Cloud Security</span>
+                        <span class="tech-tag">Load Balancing</span>
+                        <span class="tech-tag">Performance Monitoring</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Skills Carousel Section -->
+ <section id="skills" class="section">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <ul class="skills-list">
+            <li><strong>Cloud Platforms:</strong> AWS (EC2, Lambda, CloudWatch), Azure (Functions, AKS, DevOps Pipelines)</li>
+            <li><strong>Cloud & DevOps:</strong> Kubernetes, Docker, CI/CD Pipelines, Cloud Security, Load Balancing, Performance Monitoring</li>
+            <li><strong>Programming Languages:</strong> C++, C#, Java, JavaScript, PHP, Bash</li>
+            <li><strong>Systems Programming:</strong> High-Performance Computing, Network Programming, Memory Management, Multithreading, Delta Compression</li>
+            <li><strong>Game & Graphics:</strong> Unity, Unreal Engine, OpenGL, Cross-Platform SDK Development</li>
+            <li><strong>Databases:</strong> PostgreSQL, MySQL, Redis, Firebase</li>
+            <li><strong>Web Development:</strong> Node.js, ASP.NET, React, CSS</li>
+            <li><strong>Other Tools:</strong> Git, Version Control, Build Automation, IDE Integration</li>
+        </ul>
+    </div>
+</section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="section">
@@ -671,6 +783,25 @@
                 this.style.transform = 'scale(1)';
             });
         });
+
+        // On page load for each skill pill
+        document.addEventListener('DOMContentLoaded', () => {
+        const descriptionHeader = document.querySelector('.skill-header');
+        const pills = document.querySelectorAll('.skill-pill');
+
+        pills.forEach(pill => {
+            pill.addEventListener('mouseenter', () => {
+            const desc = pill.getAttribute('data-desc') || '';
+            descriptionHeader.textContent = desc;
+            });
+
+            pill.addEventListener('mouseleave', () => {
+            descriptionHeader.textContent = 'Hover over a skill to see description here';
+            });
+        });
+        });
+
+
     </script>
 </body>
 </html>
